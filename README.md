@@ -1,6 +1,6 @@
 # 2026_projects
 
-Três apps pequenos feitos pra prática e portfólio.
+Portfólio feito para práticas
 
 ## Projetos
 
