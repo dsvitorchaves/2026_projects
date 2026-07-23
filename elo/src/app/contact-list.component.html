@@ -1,0 +1,137 @@
+<section class="page">
+  <div class="heading">
+    <div>
+      <p class="eyebrow">Elo</p>
+      <h1>Contatos</h1>
+    </div>
+    <a routerLink="/novo" class="add" aria-label="Novo contato">+</a>
+  </div>
+
+  <label class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </svg>
+    <input
+      type="search"
+      placeholder="Pesquisar contatos..."
+      [ngModel]="search()"
+      (ngModelChange)="search.set($event)"
+    />
+  </label>
+
+  @if (filtered().length === 0) {
+    <p class="empty">
+      {{ search() ? 'Nenhum contato encontrado.' : 'Ninguém por aqui ainda. Adicione o primeiro.' }}
+    </p>
+  } @else {
+    @if (favorites().length > 0) {
+      <div class="section-title">
+        <span class="star">★</span>
+        Favoritos
+      </div>
+
+      <ul class="rows">
+        @for (contact of favorites(); track contact.id) {
+          <li
+            class="row"
+            [class.active]="selectedId() === contact.id"
+            (click)="select(contact.id)"
+          >
+            <div [class]="'avatar ' + avatarTone(contact.name)">
+              {{ initials(contact.name) }}
+            </div>
+
+            <div class="meta">
+              <strong>{{ contact.name }}</strong>
+              @if (selectedId() === contact.id && contact.phone) {
+                <span>{{ contact.phone }}</span>
+              }
+            </div>
+
+            <div class="actions" (click)="$event.stopPropagation()">
+              @if (contact.phone) {
+                <a class="icon-btn" [href]="'tel:' + contact.phone" title="Ligar" aria-label="Ligar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6.5 4.5h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 4.5 6.5a2 2 0 0 1 2-2z" />
+                  </svg>
+                </a>
+              }
+              @if (contact.email) {
+                <a class="icon-btn" [href]="'mailto:' + contact.email" title="Mensagem" aria-label="E-mail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 6h16v12H4z" />
+                    <path d="m4 7 8 6 8-6" />
+                  </svg>
+                </a>
+              }
+              <button type="button" class="icon-btn on" (click)="toggleFavorite(contact.id, $event)" title="Favorito">
+                ★
+              </button>
+              <a class="icon-btn" [routerLink]="['/editar', contact.id]" title="Editar">✎</a>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+
+    <div class="section-title plain">Todos os contatos</div>
+
+    @for (group of groups(); track group.letter) {
+      <div class="letter">{{ group.letter }}</div>
+      <ul class="rows">
+        @for (contact of group.items; track contact.id) {
+          <li
+            class="row"
+            [class.active]="selectedId() === contact.id"
+            (click)="select(contact.id)"
+          >
+            <div [class]="'avatar ' + avatarTone(contact.name)">
+              {{ initials(contact.name) }}
+            </div>
+
+            <div class="meta">
+              <strong>{{ contact.name }}</strong>
+              @if (selectedId() === contact.id) {
+                <span>{{ contact.phone || contact.email || 'sem contato' }}</span>
+              }
+            </div>
+
+            <div class="actions" (click)="$event.stopPropagation()">
+              @if (contact.phone) {
+                <a class="icon-btn" [href]="'tel:' + contact.phone" title="Ligar" aria-label="Ligar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6.5 4.5h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 4.5 6.5a2 2 0 0 1 2-2z" />
+                  </svg>
+                </a>
+              }
+              @if (contact.email) {
+                <a class="icon-btn" [href]="'mailto:' + contact.email" title="Mensagem" aria-label="E-mail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 6h16v12H4z" />
+                    <path d="m4 7 8 6 8-6" />
+                  </svg>
+                </a>
+              }
+              <button
+                type="button"
+                class="icon-btn"
+                [class.on]="contact.favorite"
+                (click)="toggleFavorite(contact.id, $event)"
+                title="Favorito"
+              >
+                {{ contact.favorite ? '★' : '☆' }}
+              </button>
+              <a class="icon-btn" [routerLink]="['/editar', contact.id]" title="Editar">✎</a>
+              @if (selectedId() === contact.id) {
+                <button type="button" class="icon-btn danger" (click)="remove(contact.id, $event)" title="Remover">
+                  ×
+                </button>
+              }
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>

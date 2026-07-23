@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+
+# Builds
+dist/
+build/
+out-tsc/
+.angular/
+
+# Flutter / IDE
+.idea/
+*.iml
+.vscode/
+*.lock
+!package-lock.json
+!pubspec.lock
+
+# Env / OS
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.log
+
+# Flutter platform caches
+**/android/.gradle/
+**/android/local.properties
+**/ios/Pods/
+**/ios/.symlinks/
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+
+# Misc
+coverage/
+.firebase/

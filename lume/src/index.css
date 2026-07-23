@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f3f0ea;
+  --bg-glow: #f0d9c4;
+  --surface: #fffcf8;
+  --ink: #1d1a16;
+  --muted: #7d7468;
+  --line: #e7e0d6;
+  --accent: #d9783a;
+  --accent-soft: #f3e0d0;
+  --ember: #d9783a;
+  --ember-bg: #f8e8db;
+  --sage: #5f8f6b;
+  --sage-bg: #e3efe6;
+  --ocean: #4f7f92;
+  --ocean-bg: #dde9ee;
+  --clay: #b56b5c;
+  --clay-bg: #f3e3de;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Outfit", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -10%, var(--bg-glow), transparent 60%),
+    linear-gradient(180deg, #f7f4ef 0%, var(--bg) 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.brand {
+  font-family: "Fraunces", serif;
+}

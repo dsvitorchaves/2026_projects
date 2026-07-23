@@ -1,0 +1,36 @@
+<section class="page">
+  <a routerLink="/" class="back">← Contatos</a>
+  <h1>{{ isEdit ? 'Editar contato' : 'Novo contato' }}</h1>
+
+  <form (ngSubmit)="save()" class="form">
+    <label>
+      Nome
+      <input [(ngModel)]="name" name="name" required autocomplete="name" />
+    </label>
+
+    <label>
+      Telefone
+      <input [(ngModel)]="phone" name="phone" autocomplete="tel" />
+    </label>
+
+    <label>
+      E-mail
+      <input [(ngModel)]="email" name="email" type="email" autocomplete="email" />
+    </label>
+
+    <label>
+      Observações
+      <textarea [(ngModel)]="notes" name="notes" rows="3"></textarea>
+    </label>
+
+    <label class="check">
+      <input [(ngModel)]="favorite" name="favorite" type="checkbox" />
+      Marcar como favorito
+    </label>
+
+    <div class="row">
+      <a routerLink="/" class="ghost">Cancelar</a>
+      <button type="submit">Salvar</button>
+    </div>
+  </form>
+</section>

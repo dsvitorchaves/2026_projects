@@ -1,0 +1,9 @@
+analysis_options.yaml
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+.idea/
+.vscode/
